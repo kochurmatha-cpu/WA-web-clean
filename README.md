@@ -24,7 +24,7 @@ Everything is client-side. No servers, no analytics, no "telemetry" with a wink.
 
 | Before | After | Notes |
 |:------:|:-----:|:-----:|
-| ![Before 1](<img width="1234" height="684" alt="side bar original" src="https://github.com/user-attachments/assets/4e660476-d9df-4bf9-aaf3-f2a2f9612c16"/>) | ![After 1](<img width="1280" height="720" alt="side bar gon" src="https://github.com/user-attachments/assets/c5912651-9764-4490-a677-7ab15b6a1668" />) | Sidebar hidden, intro panel removed |
+| (<img width="1234" height="684" alt="side bar original" src="https://github.com/user-attachments/assets/4e660476-d9df-4bf9-aaf3-f2a2f9612c16"/>) | (<img width="1280" height="720" alt="side bar gon" src="https://github.com/user-attachments/assets/c5912651-9764-4490-a677-7ab15b6a1668" />) | Sidebar hidden, intro panel removed |
 | ![Before 2](<img width="1280" height="720" alt="original call in chat" src="https://github.com/user-attachments/assets/ffc15df9-36c4-4329-9ba4-a8827f7aea51" />) | ![After 2](<img width="1280" height="720" alt="call cleaned" src="https://github.com/user-attachments/assets/761b8d3f-7d22-4bd5-8a3c-b503d2dbcf0d" />) | in-chat Call bubbles gone |
 | ![Before 3](<img width="1280" height="720" alt="context orginal" src="https://github.com/user-attachments/assets/9288d11d-187c-4c39-bf33-3f9824e1374d" />) | ![After 3](<img width="1280" height="720" alt="context cleaned" src="https://github.com/user-attachments/assets/21a595ca-b054-427d-b5a5-0e75cc3899f5" />) | context menu cleaned |
 
