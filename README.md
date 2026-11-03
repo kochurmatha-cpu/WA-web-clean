@@ -32,21 +32,30 @@ Everything is client-side. No servers, no analytics, no "telemetry" with a wink.
 
 ---
 
-## How much CPU does this actually use?
+## Does this eat my CPU / RAM?
 
-Short answer: **you won't feel it.** Long answer, because someone will ask:
+No. Here's what the script actually does to your machine, and why it's cheap:
 
-| Event | Added work | Cost |
-|---|---|---|
-| First time an image is ever shown | Measure its dimensions once (`Image.onload`) | ~3–10 ms, **once per unique image, ever** |
-| Every subsequent show of a cached image | Read `w`/`h` from the IndexedDB record | ~0 ms (property access) |
-| Every image swap | Two `clientWidth`/`clientHeight` reads on the intro panel | ~0.1–0.3 ms |
-| Every 10 seconds | Nothing. The cooldown gate means swaps are sparse, and cached images cost nothing. | 0 |
-| Every tab change | Same as a swap, *if* the 10 s cooldown has elapsed. Otherwise the function early-returns before touching anything. | ~0–0.3 ms |
+**CPU — basically idle.**
+- The only work that happens "often" is the rotation itself: at most **once every 10 seconds** (there's a hard cooldown), and only when a trigger fires (tab becomes visible, or the intro panel re-appears). If you sit on one tab and don't touch anything, it does **nothing**.
+- Each rotation = read one image blob from cache (or fetch it once), set a CSS background, fade it in. That's a handful of milliseconds *per swap*, not per frame. There is no animation loop, no `requestAnimationFrame`, no polling, no timers ticking in the background except the sparse rotation cooldown and a 5-second "keep my CSS alive" check that does nothing but re-attach a stylesheet object.
+- No continuous processing. When you're not looking at the intro screen, the script is asleep.
 
-For scale: the script already does `GM_xmlhttpRequest`, `URL.createObjectURL`, IndexedDB reads, deck shuffles via `GM_getValue`/`GM_setValue`, and a `CSSStyleSheet.replaceSync` **on every swap**. The adaptive sizing adds a rounding error on top of that. Your CPU will not file a complaint.
+**RAM — a few megabytes, bounded on purpose.**
+- The image cache lives in **IndexedDB (disk), not RAM**. Images are only held in memory while the one currently on screen is decoded for display — one image at a time.
+- The cache itself is hard-capped: **max 40 images or 30 MB total**, least-recently-used evicted first. So it can't grow forever, and it can't bloat your browser's memory over a long session.
+- Old blob URLs are revoked shortly after the fade completes, so they don't pile up.
 
-The expensive part of this script is **your wallpaper collection's file sizes**, not the math. If you throw 40 MB PNGs at it, the blob cache will do 40 MB of work. Use JPEG/WebP and everything is instant.
+**Network — only on a cache miss.**
+- Steady state: **zero requests.** The list is cached in Tampermonkey storage; image bytes are cached in IndexedDB. Nothing hits the network unless a brand-new image is drawn.
+- On a new image: one request to GitHub raw (or jsDelivr) for the bytes, once, then cached.
+- A single background check ~10 seconds after boot refreshes the file list and prunes anything deleted — that's it. No polling, no heartbeat, no analytics.
+
+**Disk — one small cache, capped.**
+- IndexedDB holds the cached images, ≤30 MB, auto-pruned. Deleting the script or clearing site data wipes it entirely.
+
+**The real cost is your wallpaper files, not the script.**
+- The script's own overhead is rounding-error small. If the slideshow feels heavy, it's because you're feeding it 40 MB PNGs, not because the code is doing heavy lifting. JPEG/WebP keeps everything instant.
 
 ---
 
