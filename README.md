@@ -1,6 +1,6 @@
 # WA-web-clean
 
-> A Tampermonkey userscript that makes WhatsApp Web look like *your* WhatsApp Web.
+> A Tampermonkey userscript that makes WhatsApp Web look like *MY* WhatsApp Web.
 > Built by someone who learned CSS by right-clicking "Inspect" and whispering "what the hell is `x1c4vz4f`."
 
 ---
@@ -61,11 +61,11 @@ If you want your own wallpapers: fork this repo, drop images into a folder, edit
 
 ---
 
-## Adding / moving images
+## Adding images
 
 Supported: `.png`, `.jpg`, `.jpeg`, `.webp`, `.avif`, `.bmp`. **No GIFs** (the deck and cache assume static blobs; GIFs would work but the slideshow would look like a rave).
 
-**To move images into a folder:** don't use the GitHub web UI's delete + re-upload (that's delete + add, noisy history, real bytes moved). Use GitHub Desktop — cut/paste in your local clone, commit, push. Git records it as a **rename**, the blob isn't re-uploaded, and the script picks up the new paths automatically. `github.dev` drag-and-drop *should* also produce a rename, but it's flaky with binary files and sometimes silently refuses to commit. You've been warned.
+Drop them anywhere in the repo — root or subfolder, both work. The script walks the tree recursively.
 
 ---
 
@@ -73,11 +73,11 @@ Supported: `.png`, `.jpg`, `.jpeg`, `.webp`, `.avif`, `.bmp`. **No GIFs** (the d
 
 The images in this repo were pulled from the internet — wallpapers, screenshots, things that looked nice at 2 a.m. **This repo is not monetized.** No ads, no donations, no Patreon, no "buy me a coffee," no sketchy redirect links. It's a personal customization script and a folder of wallpapers that make it look less like a corporate chat app.
 
-That said, **if you own an image in here and you'd rather it not be**, open an issue or email, and it'll be removed. No drama, no lawyers, no "please contact our legal department" autoresponder. Just a person deleting a file.
+That said, **if you own an image in here and you'd rather it not be**, open an issue or email, and it'll *probably* be removed — no drama, no lawyers, no "please contact our legal department" autoresponder. Just note that I'm not glued to GitHub notifications, so give it a minute.
 
 If you're reusing this script with your own images, same courtesy applies to you — credit or replace what isn't yours, and don't monetize a wallpaper folder and pretend it's a product.
 
-The **code** is yours to do whatever with. The **images** are "best effort, remove on request."
+The **code** is yours to do whatever with. The **images** are "best effort, remove on request, whenever I see the message."
 
 ---
 
@@ -108,10 +108,6 @@ Use at your own risk. WhatsApp can change their DOM tomorrow and break everythin
 
 ## Credits
 
-- **Code**: written by someone who is very good at `console.log` and very bad at naming CSS classes.
+- **Code**: assembled by someone whose entire development process is copy, paste, refresh, and pray. The AI did the heavy lifting; I just said "bruh" until it compiled.
 - **Wallpapers**: the internet, in all its uncredited glory. See the DMCA note above.
-- **Inspiration**: every "WhatsApp Web is ugly" post ever made.
-
----
-
-*If this script saves you 10 seconds of "why is there a giant empty gap," it did its job.*
+- **Inspiration**: free AI labor and the fact that WhatsApp Web's default look offends the eyes.
